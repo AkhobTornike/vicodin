@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-jumg$$o%k)p5(&$uyffodn37fy1*s3fz#)d#8jd$8x2do7lxgs
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -148,5 +148,3 @@ MEDIA_ROOT = BASE_DIR / 'static/images'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-WSGI_APPLICATION = 'ecomerce.wsgi.app'
