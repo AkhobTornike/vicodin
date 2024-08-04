@@ -1,0 +1,566 @@
+{% extends 'main.html' %} {% load static %} {% block content %}
+
+<!-- SHOP DETAILS AREA START -->
+<div class="ltn__shop-details-area pb-85">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-12">
+        <div class="ltn__shop-details-inner mb-60">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="ltn__shop-details-img-gallery">
+                <div class="ltn__shop-details-large-img">
+                  {% for image in images %}
+                  <div class="single-large-img">
+                    <a
+                      href="{{image.image.url}}"
+                      data-rel="lightcase:myCollection"
+                    >
+                      <img
+                        src="{{image.image.url}}"
+                        alt="Image for {{ product.name }}"
+                      />
+                    </a>
+                  </div>
+                  {% endfor %}
+                </div>
+                <div class="ltn__shop-details-small-img slick-arrow-2">
+                  {% for image in images %}
+                  <div class="single-small-img">
+                    <img
+                      src="{{image.image.url}}"
+                      alt="Image for {{ product.name }}"
+                    />
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="modal-product-info shop-details-info pl-0">
+                <div class="product-ratting">
+                  <ul>
+                    {% for star in product.rating_binary_list %}
+                    <li>
+                      <a href="#">
+                        {% if star %}
+                        <i class="fas fa-star"></i>
+                        {% else %}
+                        <i class="far fa-star"></i>
+                        {% endif %}
+                      </a>
+                    </li>
+                    {% endfor %}
+
+                    <li class="review-total">
+                      <a href="#"> ( {{review_count}} Reviews )</a>
+                    </li>
+                  </ul>
+                </div>
+                <h3>{{product.name}}</h3>
+                <div class="product-price">
+                  {% if product.discount %}
+                  <span>${{ product.discounted_price }}</span>
+                  <del>${{ product.price }}</del>
+                  {% else %}
+                  <span>${{ product.price }}</span>
+                  {% endif %}
+                </div>
+                <div class="modal-product-meta ltn__product-details-menu-1">
+                  <ul>
+                    <li>
+                      <strong>Categories:</strong>
+                      <span>
+                        <a href="#">{{product.category}}</a>
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+                {% if request.user == product.host %}
+                <div class="ltn__product-details-menu-2">
+                  <ul>
+                    <li>
+                      <a
+                        href="{% url 'update-product' product.id%}"
+                        class="theme-btn-1 btn btn-effect-1"
+                        title="edit"
+                      >
+                        <i class="fas fa-edit"></i>
+                        <span>EDIT</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="{% url 'delete-product' product.id%}"
+                        class="theme-btn-1 btn btn-effect-1"
+                        title="delete"
+                      >
+                        <i class="fas fa-trash"></i>
+                        <span>DELETE</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                {% else %}
+                <div class="ltn__product-details-menu-2">
+                  <ul>
+                    <li>
+                      <form action="" method="POST">
+                        {% csrf_token %}
+                      <div class="cart-plus-minus">
+                        <input
+                          type="text"
+                          value="01"
+                          name="qtybutton"
+                          class="cart-plus-minus-box"
+                        />
+                      </div>
+                    </li>
+                    <li>
+                        <button 
+                          type="submit"
+                          class="theme-btn-1 btn btn-effect-1" 
+                          name="add-to-cart" 
+                          data-bs-toggle="modal"
+                          data-bs-target="#add_to_cart_modal">
+                            ADD TO CART
+                        </button>
+                      </form>
+                      </li>
+                    </ul>
+                </div>
+                <div class="ltn__product-details-menu-3">
+                  <ul>
+                    <li>
+                      <form action="" method="POST">
+                        {% csrf_token %}
+                      <button
+                        name="add-to-wishlist"
+                        title="Wishlist"
+                        data-bs-toggle="modal"
+                        data-bs-target="#liton_wishlist_modal"
+                      >
+                        <i class="far fa-heart"></i>
+                        <span>Add to Wishlist</span>
+                      </button>
+                    </form>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        class=""
+                        title="Compare"
+                        data-bs-toggle="modal"
+                        data-bs-target="#quick_view_modal"
+                      >
+                        <i class="fas fa-exchange-alt"></i>
+                        <span>Compare</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <hr />
+                <div class="ltn__social-media">
+                  <ul>
+                    <li>Share:</li>
+                    <li>
+                      <a href="#" title="Facebook"
+                        ><i class="fab fa-facebook-f"></i
+                      ></a>
+                    </li>
+                    <li>
+                      <a href="#" title="Twitter"
+                        ><i class="fab fa-twitter"></i
+                      ></a>
+                    </li>
+                    <li>
+                      <a href="#" title="Linkedin"
+                        ><i class="fab fa-linkedin"></i
+                      ></a>
+                    </li>
+                    <li>
+                      <a href="#" title="Instagram"
+                        ><i class="fab fa-instagram"></i
+                      ></a>
+                    </li>
+                  </ul>
+                </div>
+                <hr />
+                <div class="ltn__safe-checkout">
+                  <h5>Guaranteed Safe Checkout</h5>
+                  <img src="img/icons/payment-2.png" alt="Payment Image" />
+                </div>
+                {% endif %}
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Shop Tab Start -->
+        <div class="ltn__shop-details-tab-inner ltn__shop-details-tab-inner-2">
+          <div class="ltn__shop-details-tab-menu">
+            <div class="nav">
+              <a
+                class="active show"
+                data-bs-toggle="tab"
+                href="#liton_tab_details_1_1"
+                >Description</a
+              >
+              <a data-bs-toggle="tab" href="#liton_tab_details_1_2" class=""
+                >Reviews</a
+              >
+            </div>
+          </div>
+          <div class="tab-content">
+            <!-- Description -->
+            <div class="tab-pane fade active show" id="liton_tab_details_1_1">
+              <div class="ltn__shop-details-tab-content-inner">
+                <h4 class="title-2">{{product.description}}</h4>
+              </div>
+            </div>
+            <!-- Review -->
+            <div class="tab-pane fade" id="liton_tab_details_1_2">
+              <div class="ltn__shop-details-tab-content-inner">
+                <h4 class="title-2">Customer Reviews</h4>
+                <div class="product-ratting">
+                  <ul>
+                    {% for star in rating_binary_list %}
+                    <li>
+                      <a href="#">
+                        {% if star %}
+                        <i class="fas fa-star"></i>
+                        {% else %}
+                        <i class="far fa-star"></i>
+                        {% endif %}
+                      </a>
+                    </li>
+                    {% endfor %}
+
+                    <li class="review-total">
+                      <a href=""> ( {{review_count}} Reviews )</a>
+                    </li>
+                  </ul>
+                </div>
+                <hr />
+                <!-- comment-area -->
+                <div class="ltn__comment-area mb-30">
+                  <div class="ltn__comment-inner">
+                    <ul>
+                      {% for review in reviews%}
+                      <li>
+                        <div class="ltn__comment-item clearfix">
+                          <div class="ltn__commenter-img">
+                            <img
+                              src="{{ review.user.avatar.url }}"
+                              alt="Image"
+                            />
+                          </div>
+                          <div class="ltn__commenter-comment">
+                            <div class="product-ratting">
+                              <ul>
+                                {% for i in range %}
+                                <li>
+                                  <a href="#">
+                                    {% if review.stars >= i %}
+                                    <i class="fas fa-star"></i>
+                                    {% else %}
+                                    <i class="far fa-star"></i>
+                                    {% endif %}
+                                  </a>
+                                </li>
+                                {% endfor %}
+                              </ul>
+                            </div>
+                            <h5>@{{review.user.username}}</h5>
+                            <p>{{review.body}}</p>
+                            <span class="ltn__comment-reply-btn"
+                              >{{ review.updated|timesince }}</span
+                            >
+                            {% if request.user == review.user %}
+                            <a href="{% url 'edit-review' review.id %}"
+                              ><span
+                                class="ltn__comment-reply-btn"
+                                style="margin-top: 50px; margin-right: 100px"
+                                >Edit</span
+                              ></a
+                            >
+                            <a href="{% url 'delete-review' review.id %}"
+                              ><span
+                                class="ltn__comment-reply-btn"
+                                style="margin-top: 50px"
+                                >Delete</span
+                              ></a
+                            >
+                            {% endif %}
+                          </div>
+                        </div>
+                      </li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                </div>
+                <!-- comment-reply -->
+                <div class="ltn__comment-reply-area ltn__form-box mb-30">
+
+                  <form action="" method="POST">
+                    {% csrf_token %}
+                    <h4 class="title-2">Add a Review</h4>
+                    <div class="mb-30">
+                      <div class="add-a-review">
+                        <h6>
+                          STARS
+                          <i class="fas fa-star" style="color: orange"></i> :
+                        </h6>
+                        <div class="product-ratting">
+                          <label
+                            ><input
+                              type="radio"
+                              name="rating"
+                              value="0"
+                            />0</label
+                          >
+                          <label
+                            ><input
+                              type="radio"
+                              name="rating"
+                              value="1"
+                            />1</label
+                          >
+                          <label
+                            ><input
+                              type="radio"
+                              name="rating"
+                              value="2"
+                            />2</label
+                          >
+                          <label
+                            ><input
+                              type="radio"
+                              name="rating"
+                              value="3"
+                            />3</label
+                          >
+                          <label
+                            ><input
+                              type="radio"
+                              name="rating"
+                              value="4"
+                            />4</label
+                          >
+                          <label
+                            ><input
+                              type="radio"
+                              name="rating"
+                              value="5"
+                            />5</label
+                          >
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="input-item input-item-textarea ltn__custom-icon"
+                    >
+                      <input
+                        type="text"
+                        name="body"
+                        placeholder="Whire you messag here"
+                      />
+                    </div>
+
+                    <div class="btn-wrapper">
+                      <button
+                        class="btn theme-btn-1 btn-effect-1 text-uppercase"
+                        type="submit"
+                      >
+                        Submit
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Shop Tab End -->
+      </div>
+      <div class="col-lg-4">
+        <aside class="sidebar ltn__shop-sidebar ltn__right-sidebar">
+          <!-- Top Rated Product Widget -->
+          <div class="widget ltn__top-rated-product-widget">
+            <h4 class="ltn__widget-title ltn__widget-title-border">
+              Top Rated Product
+            </h4>
+            <ul>
+              {% for product in top_rated_products %}
+              <li>
+                <div class="top-rated-product-item clearfix">
+                  <div class="top-rated-product-img">
+                    <a href="{% url 'product-detail' product.id %}"
+                      ><img src="{{product.main_image.url}}" alt="#"
+                    /></a>
+                  </div>
+                  <div class="top-rated-product-info">
+                    <div class="product-ratting">
+                      <ul>
+                        {% for star in product.rating_binary_list %}
+                        <li>
+                          <a href="#">
+                            {% if star %}
+                            <i class="fas fa-star"></i>
+                            {% else %}
+                            <i class="far fa-star"></i>
+                            {% endif %}
+                          </a>
+                        </li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                    <h6>
+                      <a href="product-details.html">{{product.name}}</a>
+                    </h6>
+                    <div class="product-price">
+                      {% if product.discount %}
+                      <span>${{ product.discounted_price }}</span>
+                      <del>${{ product.price }}</del>
+                      {% else %}
+                      <span>${{ product.price }}</span>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- SHOP DETAILS AREA END -->
+
+<!-- RELATED PRODUCTS AREA START -->
+<div class="ltn__product-slider-area ltn__product-gutter pb-70">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="section-title-area ltn__section-title-2">
+          <h4 class="title-2">Related Products<span>.</span></h4>
+        </div>
+      </div>
+    </div>
+    <div class="row ltn__related-product-slider-one-active slick-arrow-1">
+      <!-- ltn__product-item -->
+       {% for product in relatedProducts %}
+      <div class="col-lg-12">
+        <div class="ltn__product-item ltn__product-item-3 text-center">
+          <div class="product-img">
+            <a href="product-details.html"
+              ><img src="{{product.main_image.url}}" alt="#"
+            /></a>
+            {% if product in latestProducts %}
+            <div class="product-badge">
+              <ul>
+                <li class="sale-badge">New</li>
+              </ul>
+            </div>
+            {% endif %}
+            <div class="product-hover-action">
+              <ul>
+                  <li>
+                      <a href="{% url 'product-detail' product.id %}" title="Quick View">
+                          <i class="far fa-eye"></i>
+                      </a>
+                  </li>
+                  <li>
+                      <form method="post" action="">
+                          {% csrf_token %}
+                          <input type="hidden" name="add-to-cart" value="{{ product.id }}">
+                          <button type="submit" title="Add to Cart">
+                              <i class="fas fa-shopping-cart"></i>
+                          </button>
+                      </form>
+                  </li>
+                  <li>
+                      <form method="post" action="">
+                          {% csrf_token %}
+                          <input type="hidden" name="add-to-wishlist" value="{{ product.id }}">
+                          <button type="submit" title="Wishlist">
+                              <i class="far fa-heart"></i>
+                          </button>
+                      </form>
+                  </li>
+              </ul>
+          </div>
+          </div>
+          <div class="product-info">
+            <div class="product-ratting">
+              <ul>
+                {% for star in product.rating_binary_list %}
+                <li>
+                  <a href="#">
+                    {% if star %}
+                    <i class="fas fa-star"></i>
+                    {% else %}
+                    <i class="far fa-star"></i>
+                    {% endif %}
+                  </a>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+            <h2 class="product-title">
+              <a href="{% url 'product-detail' product.id}">{{product.name}}</a>
+            </h2>
+            <div class="product-price">
+              {% if product.discount %}
+              <span>${{ product.discounted_price }}</span>
+              <del>${{ product.price }}</del>
+              {% else %}
+              <span>${{ product.price }}</span>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<!-- RELATED PRODUCTS AREA END -->
+
+<!-- CALL TO ACTION START (call-to-action-6) -->
+<div
+  class="ltn__call-to-action-area call-to-action-6 before-bg-bottom"
+  data-bs-bg="img/1.jpg--"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div
+          class="call-to-action-inner call-to-action-inner-6 ltn__secondary-bg position-relative text-center---"
+        >
+          <div class="coll-to-info text-color-white">
+            <h1>
+              Do you want to Add new product <br />
+              lets try it fast and easy
+            </h1>
+          </div>
+          <div class="btn-wrapper">
+            <a
+              class="btn btn-effect-3 btn-white"
+              href="{% url 'create-product' %}"
+              >Add New Product <i class="icon-next"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- CALL TO ACTION END -->
+
+{% endblock %}
+
+
+<!-- Checked -->

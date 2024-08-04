@@ -1,0 +1,118 @@
+    {% load static %}
+<footer class="ltn__footer-area  ">
+    <div class="footer-top-area  section-bg-1 plr--5">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-3 col-md-6 col-sm-6 col-12">
+                    <div class="footer-widget footer-about-widget">
+                        <div class="footer-logo">
+                            <div class="site-logo">
+                                <img src="{% static 'images/logo.png' %}" alt="Logo">
+                            </div>
+                        </div>
+                        <p>Lorem Ipsum is simply dummy text of the and typesetting industry. Lorem Ipsum is dummy text of the printing.</p>
+                        <div class="footer-address">
+                            <ul>
+                                <li>
+                                    <div class="footer-address-icon">
+                                        <i class="icon-placeholder"></i>
+                                    </div>
+                                    <div class="footer-address-info">
+                                        <p>Brooklyn, New York, United States</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="footer-address-icon">
+                                        <i class="icon-call"></i>
+                                    </div>
+                                    <div class="footer-address-info">
+                                        <p><a href="tel:+0123-456789">+0123-456789</a></p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="footer-address-icon">
+                                        <i class="icon-mail"></i>
+                                    </div>
+                                    <div class="footer-address-info">
+                                        <p><a href="mailto:example@example.com">example@example.com</a></p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="ltn__social-media mt-20">
+                            <ul>
+                                <li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="#" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
+                                <li><a href="#" title="Youtube"><i class="fab fa-youtube"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-md-6 col-sm-6 col-12">
+                    <div class="footer-widget footer-menu-widget clearfix">
+                        <h4 class="footer-title">Shop</h4>
+                        <div class="footer-menu">
+                            <ul>
+                                <li><a href="{% url 'shoping' %}">Shop</a></li>
+                                {% for carg in popular_categoryes %}
+                                <li><a href="{% url 'shoping' %}?category={{carg.id}}">Shop-{{carg.name}}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-md-6 col-sm-6 col-12">
+                    <div class="footer-widget footer-menu-widget clearfix">
+                        <h4 class="footer-title">Services</h4>
+                        <div class="footer-menu">
+                            <ul>
+                                <li><a href="{% url 'home' %}">Home</a></li>
+                                <li><a href="{% url 'featured-products' %}">Featured</a></li>
+                                <li><a href="{% url 'latest-products' %}">Latest</a></li>
+                                    <li><a href="{% url 'trending-products' %}">Trending</a>
+                                <li><a href="{% url 'blog-page' %}">Blog</a>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-md-6 col-sm-6 col-12">
+                    <div class="footer-widget footer-menu-widget clearfix">
+                        <h4 class="footer-title">Customer Care</h4>
+                        <div class="footer-menu">
+                            <ul>
+                                {% if not request.user.is_authenticated %}
+                                <li><a href="{% url 'login' }">Login</a></li>
+                                <li><a href="{% url 'register' }">Register</a></li>
+                                {% endif %}
+                                <li><a href="{% url 'user-profile' request.user.id %}">My Account</a></li>
+                                <li><a href="{% url 'create-product' %}">Create Product</a></li>
+                                <li><a href="{% url 'create-update-blog' type='create' %}">Create Blog</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ltn__copyright-area ltn__copyright-2 section-bg-7  plr--5">
+        <div class="container-fluid ltn__border-top-2">
+            <div class="row">
+                <div class="col-md-6 col-12">
+                    <div class="ltn__copyright-design clearfix">
+                        <p>All Rights Reserved @ Company <span class="current-year"></span></p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-12 align-self-center">
+                    <div class="ltn__copyright-menu text-end">
+                        <ul>
+                            <li><a href="#">Terms & Conditions</a></li>
+                            <li><a href="#">Claim</a></li>
+                            <li><a href="#">Privacy & Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

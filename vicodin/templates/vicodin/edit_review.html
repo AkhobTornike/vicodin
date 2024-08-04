@@ -1,0 +1,50 @@
+{% extends 'main.html' %} {% load static %} {% block content %}
+
+
+  <!-- LOGIN AREA START (Register) -->
+  <div class="ltn__login-area pb-110">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="section-title-area text-center">
+            <h1 class="section-title">Update <br />Your Product</h1>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+          <div class="account-login-inner">
+            <form action="" method="POST" class="ltn__form-box contact-form-box">
+                {% csrf_token %}
+                <h4 class="title-2">Add a Review</h4>
+                <div class="mb-30">
+                    <div class="add-a-review">
+                        <h6>STARS <i class="fas fa-star" style="color: orange;"></i> :</h6>
+                        <div class="product-ratting">
+                            {% for value in "012345" %}
+                            <label>
+                                <input type="radio" name="rating" value="{{ value }}" {% if review.stars|stringformat:"s" == value %}checked{% endif %}>{{ value }}
+                            </label>    
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="input-item input-item-textarea ltn__custom-icon">
+                    <input type="text" name="body" value="{{review.body}}" placeholder="Whire you messag here">
+                </div>
+
+                <div class="btn-wrapper">
+                    <button type="submit" class="btn btn-effect-4 btn-white">Submit</button>    
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- LOGIN AREA END -->
+
+
+{% endblock %}
+
+<!-- Checked -->

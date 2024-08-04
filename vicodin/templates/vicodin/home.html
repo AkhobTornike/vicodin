@@ -1,0 +1,702 @@
+{% extends 'main.html' %} {% load static %} {% block content %}
+
+<!-- SLIDER AREA START (slider-3) -->
+<div class="ltn__slider-area ltn__slider-3 section-bg-1">
+  <div class="ltn__slide-one-active slick-slide-arrow-1 slick-slide-dots-1">
+    {% if most_discounted_product %}
+    <!-- ltn__slide-item -->
+    <div
+      class="ltn__slide-item ltn__slide-item-2 ltn__slide-item-3-normal--- ltn__slide-item-3 bg-image bg-overlay-theme-black-60---"
+      data-bs-bg="{{most_discounted_product.main_image.url}}"
+    >
+      <div class="ltn__slide-item-inner text-center">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12 align-self-center">
+              <div class="slide-item-info">
+                <div class="slide-item-info-inner ltn__slide-animation">
+                  <div class="slide-video mb-50 d-none">
+                    <a
+                      class="ltn__video-icon-2 ltn__video-icon-2-border"
+                      href="https://www.youtube.com/embed/tlThdr3O5Qo"
+                      data-rel="lightcase:myCollection"
+                    >
+                      <i class="fa fa-play"></i>
+                    </a>
+                  </div>
+                  <h6 class="slide-sub-title white-color--- animated">
+                    <span><i class="fas fa-syringe"></i></span>
+                    {{most_discounted_product.category}}
+                  </h6>
+                  <h1 class="slide-title animated">
+                    Get {{most_discounted_product.discount}}% Discount
+                    <br />{{most_discounted_product.name}}
+                  </h1>
+                  <div class="slide-brief animated">
+                    <p>{{most_discounted_product.description}}</p>
+                  </div>
+                  <div class="btn-wrapper animated">
+                    <a
+                      href="{% url 'product-detail' most_discounted_product.id%}"
+                      class="theme-btn-1 btn btn-effect-1"
+                      >See More</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %} {% if most_rating_product %}
+    <div
+      class="ltn__slide-item ltn__slide-item-2 ltn__slide-item-3-normal--- ltn__slide-item-3 bg-image bg-overlay-theme-black-60---"
+      data-bs-bg="{{most_rating_product.main_image.url}}"
+    >
+      <div class="ltn__slide-item-inner text-center">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12 align-self-center">
+              <div class="slide-item-info">
+                <div class="slide-item-info-inner ltn__slide-animation">
+                  <div class="slide-video mb-50 d-none">
+                    <a
+                      class="ltn__video-icon-2 ltn__video-icon-2-border"
+                      href="https://www.youtube.com/embed/tlThdr3O5Qo"
+                      data-rel="lightcase:myCollection"
+                    >
+                      <i class="fa fa-play"></i>
+                    </a>
+                  </div>
+                  <h6 class="slide-sub-title white-color--- animated">
+                    <span><i class="fas fa-syringe"></i></span>
+                    {{most_rating_product.category}}
+                  </h6>
+                  <h1 class="slide-title animated">
+                    See {{most_rating_product_reviews.count}} Reviews own
+                    <br />{{most_rating_product.name}}
+                  </h1>
+                  <div class="slide-brief animated">
+                    <p>{{most_rating_product.description}}</p>
+                  </div>
+                  <div class="btn-wrapper animated">
+                    <a
+                      href="{% url 'product-detail' most_rating_product.id%}"
+                      class="theme-btn-1 btn btn-effect-1"
+                      >See More</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %} {% if most_latest_product %}
+    <div
+      class="ltn__slide-item ltn__slide-item-2 ltn__slide-item-3-normal--- ltn__slide-item-3 bg-image bg-overlay-theme-black-60---"
+      data-bs-bg="{{most_latest_product.main_image.url}}"
+    >
+      <div class="ltn__slide-item-inner text-center">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12 align-self-center">
+              <div class="slide-item-info">
+                <div class="slide-item-info-inner ltn__slide-animation">
+                  <div class="slide-video mb-50 d-none">
+                    <a
+                      class="ltn__video-icon-2 ltn__video-icon-2-border"
+                      href="https://www.youtube.com/embed/tlThdr3O5Qo"
+                      data-rel="lightcase:myCollection"
+                    >
+                      <i class="fa fa-play"></i>
+                    </a>
+                  </div>
+                  <h6 class="slide-sub-title white-color--- animated">
+                    <span><i class="fas fa-syringe"></i></span>
+                    {{most_latest_product.category}}
+                  </h6>
+                  <h1 class="slide-title animated">
+                    See {{most_latest_product.updated|date:"Y-m-d"}} Created
+                    <br />{{most_latest_product.name}}
+                  </h1>
+                  <div class="slide-brief animated">
+                    <p>{{most_latest_product.description}}</p>
+                  </div>
+                  <div class="btn-wrapper animated">
+                    <a
+                      href="{% url 'product-detail' most_rating_product.id%}"
+                      class="theme-btn-1 btn btn-effect-1"
+                      >See More</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %} {% if latest_blog %}
+    <div
+      class="ltn__slide-item ltn__slide-item-2 ltn__slide-item-3-normal--- ltn__slide-item-3 bg-image bg-overlay-theme-black-60---"
+      data-bs-bg="{{latest_blog.image1.url}}"
+    >
+      <div class="ltn__slide-item-inner text-center">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12 align-self-center">
+              <div class="slide-item-info">
+                <div class="slide-item-info-inner ltn__slide-animation">
+                  <div class="slide-video mb-50 d-none">
+                    <a
+                      class="ltn__video-icon-2 ltn__video-icon-2-border"
+                      href="https://www.youtube.com/embed/tlThdr3O5Qo"
+                      data-rel="lightcase:myCollection"
+                    >
+                      <i class="fa fa-play"></i>
+                    </a>
+                  </div>
+                  <h6 class="slide-sub-title white-color--- animated">
+                    <span><i class="fas fa-syringe"></i></span>
+                    {{latest_blog.category}}
+                  </h6>
+                  <h1 class="slide-title animated">
+                    See {{latest_blog.updated|date:"Y-m-d"}} Created
+                    <br />{{latest_blog.title}} <br />
+                    BLOG
+                  </h1>
+                  <div class="slide-brief animated">
+                    <p>by: @{{latest_blog.author.username}}</p>
+                  </div>
+                  <div class="btn-wrapper animated">
+                    <a
+                      href="{% url 'product-detail' most_rating_product.id%}"
+                      class="theme-btn-1 btn btn-effect-1"
+                      >See More</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    <!--  -->
+  </div>
+</div>
+<!-- SLIDER AREA END -->
+
+<!-- CATEGORY AREA START -->
+<div class="ltn__category-area section-bg-1-- pt-50 pb-90">
+  <div class="container">
+    <div
+      class="row ltn__category-slider-active-six slick-arrow-1 border-bottom"
+    >
+      {% for category in categories %}
+      <div class="col-12">
+        <div class="ltn__category-item ltn__category-item-6 text-center">
+          <div class="ltn__category-item-img">
+            <a href="#">
+              <i class="fas fa-notes-medical"></i>
+            </a>
+          </div>
+          <div class="ltn__category-item-name">
+            <h6><a href="#">{{category.name}}</a></h6>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<!-- CATEGORY AREA END -->
+
+<!-- FEATURED PRODUCTS -->
+{% if products %}
+<div class="ltn__product-area ltn__product-gutter pt-115 pb-70">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="section-title-area ltn__section-title-2 text-center">
+          <h1 class="section-title">Featured Product</h1>
+        </div>
+      </div>
+    </div>
+    <div class="row ltn__tab-product-slider-one-active--- slick-arrow-1">
+      {% for product in products %}
+      <!-- ltn__product-item -->
+      <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+        <div class="ltn__product-item ltn__product-item-3 text-left">
+          <div class="product-img">
+            <a href="{% url 'product-detail' product.id %}"
+              ><img src="{{product.main_image.url}}" alt="#"
+            /></a>
+            {% if product in latestProducts %}
+            <div class="product-badge">
+              <ul>
+                <li class="sale-badge">New</li>
+              </ul>
+            </div>
+            {% endif %}
+            <div class="product-hover-action">
+              <ul>
+                <li>
+                  <a
+                    href="{% url 'product-detail' product.id %}"
+                    title="Quick View"
+                  >
+                    <i class="far fa-eye"></i>
+                  </a>
+                </li>
+                <li>
+                  <form method="post" action="">
+                    {% csrf_token %}
+                    <input
+                      type="hidden"
+                      name="add-to-cart"
+                      value="{{ product.id }}"
+                    />
+                    <button type="submit" title="Add to Cart">
+                      <i class="fas fa-shopping-cart"></i>
+                    </button>
+                  </form>
+                </li>
+                <li>
+                  <form method="post" action="">
+                    {% csrf_token %}
+                    <input
+                      type="hidden"
+                      name="add-to-wishlist"
+                      value="{{ product.id }}"
+                    />
+                    <button type="submit" title="Wishlist">
+                      <i class="far fa-heart"></i>
+                    </button>
+                  </form>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="product-ratting">
+              <ul>
+                {% for star in product.rating_binary_list %}
+                <li>
+                  <a href="#">
+                    {% if star %}
+                    <i class="fas fa-star"></i>
+                    {% else %}
+                    <i class="far fa-star"></i>
+                    {% endif %}
+                  </a>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+            <h2 class="product-title">
+              <a href="{% url 'product-detail' product.id %}"
+                >{{product.name}}</a
+              >
+            </h2>
+            <div class="product-price">
+              {% if product.discount %}
+              <span>${{ product.discounted_price }}</span>
+              <del>${{ product.price }}</del>
+              {% else %}
+              <span>${{ product.price }}</span>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endif %}
+<!-- FEATURED PRODUCT AREA END -->
+
+<!-- MOST DISCOUNTED PRODUCT AREA START -->
+<div class="ltn__about-us-area section-bg-1 bg-image-left-before pt-115 pb-115">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 align-self-center">
+        <div class="about-us-img-wrap about-img-left---">
+          <img src="{{most_discounted_product.main_image.url}}" alt="" />
+        </div>
+      </div>
+      <div class="col-lg-6 align-self-center">
+        <div class="about-us-info-wrap">
+          <div class="section-title-area ltn__section-title-2--- mb-20">
+            <h6
+              class="section-subtitle section-subtitle-2--- ltn__secondary-color"
+            >
+              <a href="{% url 'product-detail' most_discounted_product.id%}">
+                {{most_discounted_product.name}}
+              </a>
+            </h6>
+            <h1 class="section-title">
+              Grade A {{most_discounted_product.name}} For Sale. Haurry Up!
+            </h1>
+            <p>
+              Act quickly! Enjoy an exclusive discount on
+              <b>{{most_discounted_product.name}}.</b>
+              Save {{most_discounted_product.discount}}% and get it for just
+              ${{most_discounted_product.discounted_price}}.
+            </p>
+          </div>
+          <ul class="ltn__list-item-half clearfix">
+            {% for review in most_discounted_product_reviews %}
+            <li
+              style="
+                background: darkgrey;
+                border-radius: 50px;
+                text-align: center;
+              "
+            >
+              @{{review.user.username}} => {{review.body}}
+            </li>
+            {% endfor %}
+          </ul>
+          <div class="btn-wrapper animated">
+            <a
+              href="{% url 'product-detail' most_discounted_product.id%}"
+              class="ltn__secondary-color text-uppercase text-decoration-underline"
+              >View Products</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- MOST DISCOUNTED PRODUCT END -->
+
+<!-- LATEST AREA START -->
+{% if latestProducts and q == '' %}
+<div class="ltn__product-area ltn__product-gutter pt-115 pb-70">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="section-title-area ltn__section-title-2 text-center">
+          <h1 class="section-title">Leatest Product</h1>
+        </div>
+      </div>
+    </div>
+    <div class="row ltn__tab-product-slider-one-active--- slick-arrow-1">
+      {% for product in latestProducts %}
+      <!-- ltn__product-item -->
+      <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+        <div class="ltn__product-item ltn__product-item-3 text-left">
+          <div class="product-img">
+            <a href="{% url 'product-detail' product.id %}"
+              ><img src="{{product.main_image.url}}" alt="#"
+            /></a>
+            <div class="product-badge">
+              <ul>
+                <li class="sale-badge">New</li>
+              </ul>
+            </div>
+            <div class="product-hover-action">
+              <ul>
+                <li>
+                  <a
+                    href="{% url 'product-detail' product.id %}"
+                    title="Quick View"
+                  >
+                    <i class="far fa-eye"></i>
+                  </a>
+                </li>
+                <li>
+                  <form method="post" action="">
+                    {% csrf_token %}
+                    <input
+                      type="hidden"
+                      name="add-to-cart"
+                      value="{{ product.id }}"
+                    />
+                    <button type="submit" title="Add to Cart">
+                      <i class="fas fa-shopping-cart"></i>
+                    </button>
+                  </form>
+                </li>
+                <li>
+                  <form method="post" action="">
+                    {% csrf_token %}
+                    <input
+                      type="hidden"
+                      name="add-to-wishlist"
+                      value="{{ product.id }}"
+                    />
+                    <button type="submit" title="Wishlist">
+                      <i class="far fa-heart"></i>
+                    </button>
+                  </form>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="product-ratting">
+              <ul>
+                {% for star in product.rating_binary_list %}
+                <li>
+                  <a href="#">
+                    {% if star %}
+                    <i class="fas fa-star"></i>
+                    {% else %}
+                    <i class="far fa-star"></i>
+                    {% endif %}
+                  </a>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+            <h2 class="product-title">
+              <a href="{% url 'product-detail' product.id %}"
+                >{{product.name}}</a
+              >
+            </h2>
+            <div class="product-price">
+              {% if product.discount %}
+              <span>${{ product.discounted_price }}</span>
+              <del>${{ product.price }}</del>
+              {% else %}
+              <span>${{ product.price }}</span>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endif %}
+<!-- LATEST PRODUCT AREA END -->
+
+<!-- MOST RATING PRODUCT AREA START -->
+<div class="ltn__about-us-area section-bg-1 bg-image-left-before pt-115 pb-115">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 align-self-center">
+        <div class="about-us-img-wrap about-img-left---">
+          <img src="{{most_rating_product.main_image.url}}" alt="" />
+        </div>
+      </div>
+      <div class="col-lg-6 align-self-center">
+        <div class="about-us-info-wrap">
+          <div class="section-title-area ltn__section-title-2--- mb-20">
+            <h6
+              class="section-subtitle section-subtitle-2--- ltn__secondary-color"
+            >
+              <a href="{% url 'product-detail' most_rating_product.id%}">
+                {{most_rating_product.name}}
+              </a>
+            </h6>
+            <h1 class="section-title">
+              Grade A {{most_rating_product.name}} Ecsclusive. Haurry Up!
+            </h1>
+            <p>
+              Act quickly! Look at the best product,
+              <b>{{most_rating_product.name}}.</b>
+              Pay ${{most_rating_product.discounted_price}} and get it first.
+            </p>
+            <p>This product is perfect for the most trending needs.</p>
+          </div>
+          <ul class="ltn__list-item-half clearfix">
+            {% for review in most_rating_product_reviews %}
+            <li
+              style="
+                background: darkgrey;
+                border-radius: 50px;
+                text-align: center;
+              "
+            >
+              @{{review.user.username}} => {{review.body}}
+            </li>
+            {% endfor %}
+          </ul>
+          <div class="btn-wrapper animated">
+            <a
+              href="{% url 'product-detail' most_rating_product.id%}"
+              class="ltn__secondary-color text-uppercase text-decoration-underline"
+              >View Products</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- MOST DISCOUNTED PRODUCT END -->
+
+<!-- TRENDING RATING AREA START -->
+{% if trendingProducts and q == '' %}
+<div class="ltn__product-area ltn__product-gutter pt-115 pb-70">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="section-title-area ltn__section-title-2 text-center">
+          <h1 class="section-title">Trending Product</h1>
+        </div>
+      </div>
+    </div>
+    <div class="row ltn__tab-product-slider-one-active--- slick-arrow-1">
+      {% for product in trendingProducts %}
+      <!-- ltn__product-item -->
+      <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+        <div class="ltn__product-item ltn__product-item-3 text-left">
+          <div class="product-img">
+            <a href="{% url 'product-detail' product.id %}"
+              ><img src="{{product.main_image.url}}" alt="#"
+            /></a>
+            <div class="product-badge">
+              <ul>
+                <li class="sale-badge">New</li>
+              </ul>
+            </div>
+            <div class="product-hover-action">
+              <ul>
+                <li>
+                  <a
+                    href="{% url 'product-detail' product.id %}"
+                    title="Quick View"
+                  >
+                    <i class="far fa-eye"></i>
+                  </a>
+                </li>
+                <li>
+                  <form method="post" action="">
+                    {% csrf_token %}
+                    <input
+                      type="hidden"
+                      name="add-to-cart"
+                      value="{{ product.id }}"
+                    />
+                    <button type="submit" title="Add to Cart">
+                      <i class="fas fa-shopping-cart"></i>
+                    </button>
+                  </form>
+                </li>
+                <li>
+                  <form method="post" action="">
+                    {% csrf_token %}
+                    <input
+                      type="hidden"
+                      name="add-to-wishlist"
+                      value="{{ product.id }}"
+                    />
+                    <button type="submit" title="Wishlist">
+                      <i class="far fa-heart"></i>
+                    </button>
+                  </form>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="product-ratting">
+              <ul>
+                {% for star in product.rating_binary_list %}
+                <li>
+                  <a href="#">
+                    {% if star %}
+                    <i class="fas fa-star"></i>
+                    {% else %}
+                    <i class="far fa-star"></i>
+                    {% endif %}
+                  </a>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+            <h2 class="product-title">
+              <a href="{% url 'product-detail' product.id %}"
+                >{{product.name}}</a
+              >
+            </h2>
+            <div class="product-price">
+              {% if product.discount %}
+              <span>${{ product.discounted_price }}</span>
+              <del>${{ product.price }}</del>
+              {% else %}
+              <span>${{ product.price }}</span>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endif %}
+<!-- TRENDING PRODUCT AREA END -->
+
+<!-- BLOG AREA START -->
+{% if blogs and q == '' %}
+<div class="ltn__blog-area ltn__blog-item-3-normal mb-100">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="section-title-area ltn__section-title-2 text-center">
+          <h1 class="section-title">Blogs</h1>
+        </div>
+      </div>
+
+      <!-- Blog Item -->
+      {% for blog in blogs %}
+      <div class="col-lg-4 col-sm-6 col-12">
+        <div class="ltn__blog-item ltn__blog-item-3">
+          <div class="ltn__blog-img">
+            <a href="{% url 'blog-detail' blog.id %}"
+              ><img src="{{blog.image1.url}}" alt="#"
+            /></a>
+          </div>
+          <div class="ltn__blog-brief">
+            <div class="ltn__blog-meta">
+              <ul>
+                <li class="ltn__blog-author">
+                  <a href="#"
+                    ><i class="far fa-user"></i>by: {{blog.author.username}}</a
+                  >
+                </li>
+                <li class="ltn__blog-tags">
+                  <a href="#"><i class="fas fa-tags"></i>{{blog.category}}</a>
+                </li>
+              </ul>
+            </div>
+            <h3 class="ltn__blog-title">
+              <a href="blog-details.html">{{blog.title}}</a>
+            </h3>
+            <div class="ltn__blog-meta-btn">
+              <div class="ltn__blog-meta">
+                <ul>
+                  <li class="ltn__blog-date">
+                    <i class="far fa-calendar-alt"></i>{{blog.created}}
+                  </li>
+                </ul>
+              </div>
+              <div class="ltn__blog-btn">
+                <a href="{% url 'blog-detail' blog.id %}">Read more</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endif %}
+<!-- BLOG AREA END -->
+{% endblock %}
+
+<!-- Checked -->

@@ -1,0 +1,370 @@
+{% extends 'main.html' %} {% load static %} {% block content %}
+
+<!-- WISHLIST AREA START -->
+<div class="liton__wishlist-area pb-70">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <!-- PRODUCT TAB AREA START -->
+        <div class="ltn__product-tab-area">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="ltn__tab-menu-list mb-50">
+                  <div class="nav">
+                    <a
+                      class="active show"
+                      data-bs-toggle="tab"
+                      href="#liton_tab_1_1"
+                      >Dashboard <i class="fas fa-home"></i
+                    ></a>
+                    <a data-bs-toggle="tab" href="#liton_tab_1_2"
+                      >Orders <i class="fas fa-file-alt"></i
+                    ></a>
+                    <a data-bs-toggle="tab" href="#liton_tab_1_3"
+                      >WishList <i class="fas fa-arrow-down"></i
+                    ></a>
+                    <a data-bs-toggle="tab" href="#liton_tab_1_4"
+                      >address <i class="fas fa-map-marker-alt"></i
+                    ></a>
+                    <a data-bs-toggle="tab" href="#liton_tab_1_5"
+                      >Cards <i class="fas fa-map-marker-alt"></i
+                    ></a>
+                    <a data-bs-toggle="tab" href="#liton_tab_1_6"
+                      >Account Details <i class="fas fa-user"></i
+                    ></a>
+                    <a href="{% url 'logout' %}"
+                      >Logout <i class="fas fa-sign-out-alt"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-8">
+                <div class="tab-content">
+                  <div class="tab-pane fade active show" id="liton_tab_1_1">
+                    <div class="ltn__myaccount-tab-content-inner">
+                      <p>Hello <strong>{{user.username}}</strong></p>
+                      <p>
+                        From your account dashboard you can view your
+                        <span>recent orders</span>, manage your
+                        <span>shipping and billing addresses</span>, and
+                        <span>edit your password and account details</span>.
+                      </p>
+                      <img src="{{user.avatar.url}}" alt="" />
+                    </div>
+                  </div>
+                  <!-- ordering -->
+                  <div class="tab-pane fade" id="liton_tab_1_2">
+                    <div class="ltn__myaccount-tab-content-inner">
+                      <div class="table-responsive">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th>Product</th>
+                              <th>Date</th>
+                              <th>Status</th>
+                              <th>Card</th>
+                              <th>Price</th>
+                              <th>Finish</th>
+                              <th>Cancel</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for item in order_items %}
+                            <tr>
+                              <td>{{item.product.name}}</td>
+                              <td>{{item.date|date:"y/m/d"}}</td>
+                              <td>{{item.status}}</td>
+                              <td>{{item.card}}</td>
+                              <td>{{item.price}}</td>
+                              <td>
+                                <form action="" method="POST">
+                                  {% csrf_token %}
+                                  <input type="text" name="finish-order-id" value="{{item.id}}" hidden>
+                                  <button
+                                    type="submit"
+                                    class="btn btn-success"
+                                    name="finish-order"
+                                  >
+                                    Finish
+                                  </button>
+                                </form>
+                              </td>
+                              <td>
+                                <form action="" method="POST">
+                                  {% csrf_token %}
+                                  <input type="text" name="cancel-order-id" value="{{item.id}}" hidden>
+                                  <button
+                                    type="submit"
+                                    class="btn btn-success"
+                                    style="background-color: red"
+                                    name="cancel-order"
+                                  >
+                                    Cancel
+                                  </button>
+                                </form>
+                              </td>
+                            </tr>
+                            {% endfor %}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- wish list -->
+                  <div class="tab-pane fade" id="liton_tab_1_3">
+                    <div class="ltn__myaccount-tab-content-inner">
+                      <div class="table-responsive">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th>Product</th>
+                              <th>Date</th>
+                              <th>Price</th>
+                              <th>delete</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for item in wishList %}
+                            <tr>
+                              <td><a href="{% url 'product-detail' pk=item.product.id %}">{{item.product.name}}</a></td>
+                              <td>
+                                {% if item.product.updated%}
+                                {{item.product.updated}} 
+                                {% else %}
+                                {{item.product.created}}
+                                 {% endif %}
+                              </td>
+                              <td>{{item.product.discounted_price}}</td>
+                              <td>
+                                <form action="" method="POST">
+                                  {% csrf_token %}
+                                  <input type="text" name="delete-wishlist-id" value="{{item.id}}" hidden>
+                                  <button
+                                    type="submit"
+                                    class="btn btn-success"
+                                    style="background-color: red"
+                                    name="delete-wishlist"
+                                  >
+                                    Delete
+                                  </button>
+                                </form>
+                              </td>
+                            </tr>
+                            {% endfor %}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- address -->
+                  <div class="tab-pane fade" id="liton_tab_1_4">
+                    <div class="ltn__myaccount-tab-content-inner">
+                      <p>
+                        The following addresses will be used on the checkout
+                        page by default.
+                      </p>
+                      <div class="row">
+                        {% for address in addresses %}
+                        <div class="col-md-4 col-12 learts-mb-30">
+                          <h4>Country</h4>
+                          <address>
+                            <p><strong>{{address.country}}</strong></p>
+                          </address>
+                          <h4>City</h4>
+                          <address>
+                            <p><strong>{{address.city}}</strong></p>
+                          </address>
+                        </div>
+                        <div class="col-md-4 col-12 learts-mb-30">
+                          <h4>
+                            Street <small><a href="#">edit</a></small>
+                          </h4>
+                          <address>
+                            <p><strong>{{address.street}}</strong></p>
+                          </address>
+                          <h4>zip code</h4>
+                          <address>
+                            <p><strong>{{address.zip_code}}</strong></p>
+                          </address>
+                        </div>
+                        <div class="col-md-4 col-12 learts-mb-30">
+                          <form action="" method="POST">
+                            {% csrf_token %}
+                            <input type="text" name="delete-address-id" value="{{address.id}}" hidden>
+                            <button
+                              type="submit"
+                              class="btn btn-success"
+                              style="background-color: red; margin-top: 40px;"
+                              name="delete-address"
+                            >
+                              Delete
+                            </button>
+                          </form>
+                        </div>
+                        <hr />
+                        {% endfor %}
+                        {% if addressesCount < 3 %}
+                        <div class="btn-wrapper">
+                          <a
+                            class="btn btn-effect-3 btn-white"
+                            href="{% url 'add-address' %}"
+                            >Add New Address <i class="icon-next"></i
+                          ></a>
+                        </div>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+                  <!-- cards -->
+                  <div class="tab-pane fade" id="liton_tab_1_5">
+                    <div class="ltn__myaccount-tab-content-inner">
+                      <p>
+                        The following addresses will be used on the checkout
+                        page by default.
+                      </p>
+                      <div class="row">
+                        {% for card in cards %}
+                        <div class="col-md-4 col-12 learts-mb-30">
+                          <h4>Card Number</h4>
+                          <address>
+                            <p><strong>{{card.card_number}}</strong></p>
+                          </address>
+                          <h4>Expiry Date</h4>
+                          <address>
+                            <p><strong>{{card.expiration_date}}</strong></p>
+                          </address>
+                        </div>
+                        <div class="col-md-4 col-12 learts-mb-30">
+                          <h4>
+                            Holder Name <small><a href="#">edit</a></small>
+                          </h4>
+                          <address>
+                            <p><strong>{{card.card_holder}}</strong></p>
+                          </address>
+                          <h4>CVV</h4>
+                          <address>
+                            <p><strong>{{card.cvv}}</strong></p>
+                          </address>
+                        </div>
+                        <div class="col-md-4 col-12 learts-mb-30">
+                          <form action="" method="POST">
+                            {% csrf_token %}
+                            <input type="text" name="delete-card-id" value="{{card.id}}" hidden>
+                            <button
+                              type="submit"
+                              class="btn btn-success"
+                              style="background-color: red; margin-top: 40px;"
+                              name="delete-card"
+                            >
+                              Delete
+                            </button>
+                          </form>
+                        </div>
+                        <hr />
+                        {% endfor %}
+                        {% if cardsCount < 3 %}
+                        <div class="btn-wrapper">
+                          <a
+                            class="btn btn-effect-3 btn-white"
+                            href="{% url 'add-card' %}"
+                            >Add New Card <i class="icon-next"></i
+                          ></a>
+                        </div>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+                  <!-- account-details -->
+                  <div class="tab-pane fade" id="liton_tab_1_6">
+                    <div class="ltn__myaccount-tab-content-inner">
+                      <p>
+                        The following addresses will be used on the checkout
+                        page by default.
+                      </p>
+                      <div class="ltn__form-box">
+                        <form
+                          action=""
+                          method="POST"
+                          enctype="multipart/form-data"
+                        >
+                          {% csrf_token %}
+                          <div class="row mb-50">
+                            {% for field in form %}
+                            <div class="col-md-6">
+                              <label>{{field.name}}</label>
+                              {{field}}
+                            </div>
+                            {% endfor %}
+                          </div>
+                          <fieldset>
+                            <legend>Password change</legend>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label>Current password:</label>
+                                    <input type="password" name="old_password" />
+                                    <label>New password:</label>
+                                    <input type="password" name="new_password" />
+                                    <label>Confirm new password:</label>
+                                    <input type="password" name="confirm_password" />
+                                </div>
+                            </div>
+                        </fieldset>
+                          <div class="btn-wrapper">
+                            <button
+                              type="submit"
+                              class="btn theme-btn-1 btn-effect-1 text-uppercase"
+                              name="change-password"
+                            >
+                              Save Changes
+                            </button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- PRODUCT TAB AREA END -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- WISHLIST AREA START -->
+
+<!-- CALL TO ACTION START (call-to-action-6) -->
+<div
+  class="ltn__call-to-action-area call-to-action-6 before-bg-bottom"
+  data-bs-bg="img/1.jpg--"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div
+          class="call-to-action-inner call-to-action-inner-6 ltn__secondary-bg position-relative text-center---"
+        >
+          <div class="coll-to-info text-color-white">
+            <h1>
+              Do you want to Add new product <br />
+              lets try it fast and easy
+            </h1>
+          </div>
+          <div class="btn-wrapper">
+            <a
+              class="btn btn-effect-3 btn-white"
+              href="{% url 'create-product' %}"
+              >Add New Product <i class="icon-next"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- CALL TO ACTION END -->
+{% endblock %}
+
+<!-- Checked -->

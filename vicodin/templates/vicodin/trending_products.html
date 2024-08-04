@@ -1,0 +1,105 @@
+{% extends 'main.html' %} {% load static %} {% block content %} {% if products %}
+<div class="ltn__product-area ltn__product-gutter pt-115 pb-70">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="section-title-area ltn__section-title-2 text-center">
+          <h1 class="section-title">Trending Product</h1>
+        </div>
+      </div>
+    </div>
+    <div class="row ltn__tab-product-slider-one-active--- slick-arrow-1">
+      {% for product in products %}
+      <!-- ltn__product-item -->
+      <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+        <div class="ltn__product-item ltn__product-item-3 text-left">
+          <div class="product-img">
+            <a href="{% url 'product-detail' product.id %}"
+              ><img src="{{product.main_image.url}}" alt="#"
+            /></a>
+            <div class="product-badge">
+              {% if product in latestProducts %}
+              <ul>
+                <li class="sale-badge">New</li>
+              </ul>
+              {% endif %}
+            </div>
+            <div class="product-hover-action">
+              <ul>
+                  <li>
+                      <a href="{% url 'product-detail' product.id %}" title="Quick View">
+                          <i class="far fa-eye"></i>
+                      </a>
+                  </li>
+                  <li>
+                      <form method="post" action="">
+                          {% csrf_token %}
+                          <input type="hidden" name="add-to-cart" value="{{ product.id }}">
+                          <button type="submit" title="Add to Cart">
+                              <i class="fas fa-shopping-cart"></i>
+                          </button>
+                      </form>
+                  </li>
+                  <li>
+                      <form method="post" action="">
+                          {% csrf_token %}
+                          <input type="hidden" name="add-to-wishlist" value="{{ product.id }}">
+                          <button type="submit" title="Wishlist">
+                              <i class="far fa-heart"></i>
+                          </button>
+                      </form>
+                  </li>
+              </ul>
+          </div>
+          </div>
+          <div class="product-info">
+            <div class="product-ratting">
+              <ul>
+                {% for star in product.rating_binary_list %}
+                <li>
+                  <a href="#">
+                    {% if star %}
+                    <i class="fas fa-star"></i>
+                    {% else %}
+                    <i class="far fa-star"></i>
+                    {% endif %}
+                  </a>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+            <h2 class="product-title">
+              <a href="{% url 'product-detail' product.id %}"
+                >{{product.name}}</a
+              >
+            </h2>
+            <div class="product-price">
+              {% if product.discount %}
+              <span>${{ product.discounted_price }}</span>
+              <del>${{ product.price }}</del>
+              {% else %}
+              <span>${{ product.price }}</span>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% else %}
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="section-title-area ltn__section-title-2 text-center">
+        <h1 class="section-title">No Trending Product</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endif %} {% endblock %}
+
+<!-- Checked -->

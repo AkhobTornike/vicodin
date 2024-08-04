@@ -1,0 +1,295 @@
+{% extends 'main.html' %} {% load static %} {% block content %}
+    
+    <!-- PRODUCT DETAILS AREA START -->
+    <div class="ltn__product-area ltn__product-gutter mb-120">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 order-lg-2 mb-120">
+                    <div class="ltn__shop-options">
+                        <ul>
+                            <li>
+                                <div class="ltn__grid-list-tab-menu ">
+                                    <div class="nav">
+                                        <a class="active show" data-bs-toggle="tab" href="#liton_product_grid"><i class="fas fa-th-large"></i></a>
+                                        <a data-bs-toggle="tab" href="#liton_product_list"><i class="fas fa-list"></i></a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                               <div class="showing-product-number text-right">
+                                <span>Showing {{ start_index }}–{{ end_index }} of {{ products_count }} results</span>
+                                </div> 
+                            </li>
+                            <li>
+                                <form method="POST" action="">
+                                    {% csrf_token %}
+                                    <div class="short-by text-center">
+                                        <select class="nice-select" name="sorting_option">
+                                            <option value="default">Default Sorting</option>
+                                            <option value="popularity">Sort by popularity</option>
+                                            <option value="new_arrivals">Sort by new arrivals</option>
+                                            <option value="price_low_high">Sort by price: low to high</option>
+                                            <option value="price_high_low">Sort by price: high to low</option>
+                                        </select>
+                                        <button type="submit">Sort</button>
+                                    </div>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane fade active show" id="liton_product_grid">
+                            <div class="ltn__product-tab-content-inner ltn__product-grid-view">
+                                <div class="row">
+                                    {% for product in page_obj %}
+                                    <!-- ltn__product-item -->
+                                    <div class="col-xl-4 col-sm-6 col-6">
+                                        <div class="ltn__product-item ltn__product-item-3 text-center">
+                                            <div class="product-img">
+                                                <a href="{% url 'product-detail' product.id %}"><img src="{{product.main_image.url}}" alt="#"></a>
+                                                {% if product in latestProducts %}
+                                                <div class="product-badge">
+                                                    <ul>
+                                                        <li class="sale-badge">New</li>
+                                                    </ul>
+                                                </div>
+                                                {% endif %}
+                                                <div class="product-hover-action">
+                                                    <ul>
+                                                        <li>
+                                                            <a href="{% url 'product-detail' product.id %}" title="Quick View">
+                                                                <i class="far fa-eye"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <form method="post" action="">
+                                                                {% csrf_token %}
+                                                                <input type="hidden" name="add-to-cart" value="{{ product.id }}">
+                                                                <button type="submit" title="Add to Cart">
+                                                                    <i class="fas fa-shopping-cart"></i>
+                                                                </button>
+                                                            </form>
+                                                        </li>
+                                                        <li>
+                                                            <form method="post" action="">
+                                                                {% csrf_token %}
+                                                                <input type="hidden" name="add-to-wishlist" value="{{ product.id }}">
+                                                                <button type="submit" title="Wishlist">
+                                                                    <i class="far fa-heart"></i>
+                                                                </button>
+                                                            </form>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="product-info">
+                                                <div class="product-ratting">
+                                                    {% for star in product.rating_binary_list %}
+                                                    <li>
+                                                      <a href="#">
+                                                        {% if star %}
+                                                        <i class="fas fa-star"></i>
+                                                        {% else %}
+                                                        <i class="far fa-star"></i>
+                                                        {% endif %}
+                                                      </a>
+                                                    </li>
+                                                    {% endfor %}
+                                                </div>
+                                                <h2 class="product-title"><a href="product-details.html">{{product.name}}</a></h2>
+                                                <div class="product-price">
+                                                    {% if product.discount %}
+                                                    <span>${{ product.discounted_price }}</span>
+                                                    <del>${{ product.price }}</del>
+                                                    {% else %}
+                                                    <span>${{ product.price }}</span>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="liton_product_list">
+                            <div class="ltn__product-tab-content-inner ltn__product-list-view">
+                                <div class="row">
+                                    {% for product in page_obj %}
+                                    <!-- ltn__product-item -->
+                                    <div class="col-lg-12">
+                                        <div class="ltn__product-item ltn__product-item-3">
+                                            <div class="product-img">
+                                                <a href="{% url 'product-detail' product.id %}"><img src="{{product.main_image.url}}" alt="#"></a>
+                                                {% if product in latestProducts %}
+                                                <div class="product-badge">
+                                                    <ul>
+                                                        <li class="sale-badge">New</li>
+                                                    </ul>
+                                                </div>
+                                                {% endif %}
+                                            </div>
+                                            <div class="product-info">
+                                                <h2 class="product-title"><a href="product-details.html">Thermometer Gun</a></h2>
+                                                <div class="product-ratting">
+                                                    <ul>
+                                                        {% for star in product.rating_binary_list %}
+                                                        <li>
+                                                          <a href="#">
+                                                            {% if star %}
+                                                            <i class="fas fa-star"></i>
+                                                            {% else %}
+                                                            <i class="far fa-star"></i>
+                                                            {% endif %}
+                                                          </a>
+                                                        </li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+                                                <div class="product-price">
+                                                    {% if product.discount %}
+                                                    <span>${{ product.discounted_price }}</span>
+                                                    <del>${{ product.price }}</del>
+                                                    {% else %}
+                                                    <span>${{ product.price }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="product-brief">
+                                                    <p>{{product.description}}</p>
+                                                </div>
+                                                <div class="product-hover-action">
+                                                    <ul>
+                                                        <li>
+                                                            <a href="#" value="{{product.id}}" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                                                <i class="far fa-eye"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
+                                                                <i class="fas fa-shopping-cart"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                                                <i class="far fa-heart"></i></a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ltn__pagination-area text-center">
+                        <div class="ltn__pagination">
+                            <ul>
+                                {% if page_obj.has_previous %}
+                                <li><a href="?page=1"><i class="fas fa-angle-double-left"></i></a></li>
+                                <li><a href="?page={{ page_obj.previous_page_number }}"><i class="fas fa-angle-left"></i></a></li>
+                                {% endif %}
+                                {% for num in page_obj.paginator.page_range %}
+                                <li class="{% if num == page_obj.number %}active{% endif %}"><a href="?page={{ num }}">{{ num }}</a></li>
+                                {% endfor %}
+                                {% if page_obj.has_next %}
+                                <li><a href="?page={{ page_obj.next_page_number }}"><i class="fas fa-angle-right"></i></a></li>
+                                <li><a href="?page={{ page_obj.paginator.num_pages }}"><i class="fas fa-angle-double-right"></i></a></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- FILTER LEFT SIDEBAR -->
+                <div class="col-lg-4  mb-120">
+                    <aside class="sidebar ltn__shop-sidebar ltn__right-sidebar">
+                        <!-- Clear Filter Button -->
+                        <div class="widget ltn__clear-filter-widget">
+                            <form action="" method="GET">
+                                <button type="submit" style="background:none;border:none;padding:0;margin:0;color:inherit;cursor:pointer;">
+                                    Clear Filters
+                                </button>
+                            </form>
+                        </div>
+                        <!-- Search Widget -->
+                        <div class="widget ltn__search-widget">
+                            <h4 class="ltn__widget-title ltn__widget-title-border">Search Objects</h4>
+                            <form action="#" method="GET">
+                                {% csrf_token %}
+                                <input type="text" name="q" placeholder="Search your keyword...">
+                                <button type="submit"><i class="fas fa-search"></i></button>
+                            </form>
+                        </div>
+                        <!-- Category Widget -->
+                        <div class="widget ltn__menu-widget">
+                            <h4 class="ltn__widget-title ltn__widget-title-border">Product categories</h4>
+                            <ul>
+                                {% for category in categories %}
+                                <li>
+                                    <form action="" method="GET">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="category" value="{{ category.id }}">
+                                        <button type="submit" style="background:none;border:none;padding:0;margin:0;color:inherit;cursor:pointer;">
+                                            {{ category.name }} <span><i class="fas fa-long-arrow-alt-right"></i></span>
+                                        </button>
+                                    </form>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <!-- Price Filter Widget -->
+                        <div class="widget ltn__price-filter-widget">
+                            <h4 class="ltn__widget-title ltn__widget-title-border">Filter by price</h4>
+                            <div class="price_filter">
+                                <div class="price_slider_amount">
+                                    <form action="" method="GET">
+                                        {% csrf_token %}
+                                        <input type="number" name="min_price" placeholder="Min Price" step="0.01" />
+                                        <input type="number" name="max_price" placeholder="Max Price" step="0.01" />
+                                        <input type="submit" value="Filter" />
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- PRODUCT DETAILS AREA END -->
+
+    <!-- CALL TO ACTION START (call-to-action-6) -->
+    <div
+  class="ltn__call-to-action-area call-to-action-6 before-bg-bottom"
+  data-bs-bg="img/1.jpg--"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div
+          class="call-to-action-inner call-to-action-inner-6 ltn__secondary-bg position-relative text-center---"
+        >
+          <div class="coll-to-info text-color-white">
+            <h1>
+              Do you want to Add new product <br />
+              lets try it fast and easy
+            </h1>
+          </div>
+          <div class="btn-wrapper">
+            <a
+              class="btn btn-effect-3 btn-white"
+              href="{% url 'create-product' %}"
+              >Add New Product <i class="icon-next"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <!-- CALL TO ACTION END -->
+
+{% endblock %}
+
+<!-- Checked -->

@@ -1,0 +1,103 @@
+{% extends 'main.html' %} {% load static %} {% block content %}
+
+<!-- PAGE DETAILS AREA START (blog-details) -->
+<div class="ltn__page-details-area ltn__blog-details-area mb-120">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="ltn__blog-details-wrap">
+          <div class="ltn__page-details-inner ltn__blog-details-inner">
+            <div class="ltn__blog-meta">
+              <ul>
+                <li class="ltn__blog-category">
+                  <a href="#">{{blog.category}}</a>
+                </li>
+              </ul>
+            </div>
+            <h2 class="ltn__blog-title">{{blog.title}}</h2>
+            <div class="ltn__blog-meta">
+              <ul>
+                <li class="ltn__blog-author">
+                  <a href="#"
+                    ><img src="{{blog.author.avatar.url}}" alt="#" />By:
+                    {{blog.author.username}}</a
+                  >
+                </li>
+                <li class="ltn__blog-date">
+                  <i class="far fa-calendar-alt"></i>{{blog.created}}
+                </li>
+                <li>
+                  <a href="#"><i class="far fa-comments"></i>35 Comments</a>
+                </li>
+              </ul>
+            </div>
+            <p>{{blog.body}}</p>
+
+            {% if blog.image1 != 'blog_def.png' %}
+            <img src="{{ blog.image1.url }}" alt="Image" />
+            {% endif %} {% if blog.topic_title1 %}
+            <h2>{{ blog.topic_title1 }}</h2>
+            {% endif %} {% if blog.body1 %}
+            <p>{{ blog.body1 }}</p>
+            {% endif %}
+            <hr />
+
+            {% if blog.image2 != 'blog_def.png' %}
+            <img src="{{ blog.image2.url }}" alt="Image" />
+            {% endif %} {% if blog.topic_title2 %}
+            <h2>{{ blog.topic_title2 }}</h2>
+            {% endif %} {% if blog.body2 %}
+            <p>{{ blog.body2 }}</p>
+            {% endif %}
+            <hr />
+
+            {% if blog.image3 != 'blog_def.png' %}
+            <img src="{{ blog.image3.url }}" alt="Image" />
+            {% endif %} {% if blog.topic_title3 %}
+            <h2>{{ blog.topic_title3 }}</h2>
+            {% endif %} {% if blog.body3 %}
+            <p>{{ blog.body3 }}</p>
+            {% endif %}
+            <blockquote>
+              <h6 class="ltn__secondary-color mt-0">BY AUTHOR</h6>
+              {{blog.author_description}}
+            </blockquote>
+          </div>
+          <hr />
+          <!-- comment-area -->
+          <div class="ltn__comment-area mb-50">
+            <div class="ltn-author-introducing clearfix">
+              <div class="author-img">
+                <img src="{{blog.author.avatar.url}}    " alt="Author Image" />
+              </div>
+              <div class="author-info">
+                <h6>Written by</h6>
+                <h2>{{blog.author.first_name}} {{blog.author.last_name}}</h2>
+                <p>{{blog.author.bio}}</p>
+              </div>
+            </div>
+          </div>
+          <hr />
+          <hr />
+          <div class="ltn__comment-area mb-50">
+            <div class="ltn-author-introducing clearfix">
+                <form action="" method="POST" class="ltn__form-box contact-form-box" style="margin-inline: 280px">
+                    {% csrf_token %}
+                    <h4>Are you sure you want to delete ?</h4>
+                
+                    <div class="btn-wrapper" style="margin-left: 25px">
+                        <button type="submit" name="action" value="cancel" class="btn btn-effect-4 btn-white">Cancel</button>
+                        <button type="submit" name="action" value="delete" class="btn btn-effect-4 btn-white">Delete</button>
+                    </div>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- PAGE DETAILS AREA END -->
+{% endblock %}
+
+<!-- Checked -->

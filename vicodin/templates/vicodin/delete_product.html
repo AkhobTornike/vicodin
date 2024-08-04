@@ -1,0 +1,148 @@
+{% extends 'main.html' %}
+ {% load static %} 
+ 
+ {% block content %}
+
+  <!-- LOGIN AREA START (Register) -->
+  <div class="ltn__shop-details-inner mb-60">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="ltn__shop-details-img-gallery">
+                <div class="ltn__shop-details-large-img">
+                    <div class="single-large-img">
+                        <a href="img/product/1.png" data-rel="lightcase:myCollection">
+                            <img src="{% static 'images/product/1.png' %}" alt="Image">
+                        </a>
+                    </div>
+                    <div class="single-large-img">
+                        <a href="img/product/2.png" data-rel="lightcase:myCollection">
+                            <img src="{% static 'images/product/2.png' %}" alt="Image">
+                        </a>
+                    </div>
+                    <div class="single-large-img">
+                        <a href="img/product/3.png" data-rel="lightcase:myCollection">
+                            <img src="{% static 'images/product/3.png' %}" alt="Image">
+                        </a>
+                    </div>
+                    <div class="single-large-img">
+                        <a href="img/product/4.png" data-rel="lightcase:myCollection">
+                            <img src="{% static 'images/product/5.png' %}" alt="Image">
+                        </a>
+                    </div>
+                    <div class="single-large-img">
+                        <a href="img/product/5.png" data-rel="lightcase:myCollection">
+                            <img src="{% static 'images/product/6.png' %}" alt="Image">
+                        </a>
+                    </div>
+                    <div class="single-large-img">
+                        <a href="img/product/6.png" data-rel="lightcase:myCollection">
+                            <img src="{% static 'images/product/7.png' %}" alt="Image">
+                        </a>
+                    </div>
+                    <div class="single-large-img">
+                        <a href="img/product/7.png" data-rel="lightcase:myCollection">
+                            <img src="{% static 'images/product/8.png' %}" alt="Image">
+                        </a>
+                    </div>
+                </div>
+                <div class="ltn__shop-details-small-img slick-arrow-2">
+                    <div class="single-small-img">
+                        <img src="{% static 'images/product/1.png' %}" alt="Image">
+                    </div>
+                    <div class="single-small-img">
+                        <img src="{% static 'images/product/2.png' %}" alt="Image">
+                    </div>
+                    <div class="single-small-img">
+                        <img src="{% static 'images/product/3.png' %}" alt="Image">
+                    </div>
+                    <div class="single-small-img">
+                        <img src="{% static 'images/product/4.png' %}" alt="Image">
+                    </div>
+                    <div class="single-small-img">
+                        <img src="{% static 'images/product/5.png' %}" alt="Image">
+                    </div>
+                    <div class="single-small-img">
+                        <img src="{% static 'images/product/6.png' %}" alt="Image">
+                    </div>
+                    <div class="single-small-img">
+                        <img src="{% static 'images/product/7.png' %}" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="modal-product-info shop-details-info pl-0">
+                <h3>{{product.name}}</h3>
+                <h4>{{product.host.username}}</h4>
+                <div class="product-price">
+                    {% if product.discount %}
+                    <span>${{ product.discounted_price }}</span>
+                    <del>${{ product.price }}</del>
+                {% else %}
+                    <span>${{ product.price }}</span>
+                {% endif %}
+                </div>
+                
+                <div class="modal-product-meta ltn__product-details-menu-1">
+                    <ul>
+                        <li>
+                            <strong>Categories:</strong> 
+                            <span>
+                                <a href="#">face-mask</a>
+                                <a href="#">ppe-kit</a>
+                                <a href="#">safety-suits</a>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="ltn__product-details-menu-3">
+                    <ul>
+                        <li>
+                            <span>Description</span>
+                        </li>
+                        <li>
+                            <span>{{product.description}}</span>
+                        </li>
+                    </ul>
+                </div>
+                <hr>
+                <div class="ltn__product-details-menu-3">
+                    <div class="product-ratting">
+                        <ul>
+                            <li class="review-total"> <a href="#">Reviews ({{review_count}})</a></li>
+
+                            {% for star in rating_binary_list %}
+                            <li><a href="#">
+                                {% if star %}
+                                <i class="fas fa-star"></i>
+                                {% else %}
+                                <i class="far fa-star"></i>
+                                {% endif %}
+                            </a></li>
+                            {% endfor %}
+    
+                        </ul>
+                    </div>
+                </div>
+                <hr>
+                <div class="ltn__safe-checkout">
+                    <form action="" method="POST" class="ltn__form-box contact-form-box">
+                        {% csrf_token %}
+                        <h4>Are you sure you want to delete ?</h4>
+        
+                        <div class="btn-wrapper">
+                            <button type="submit" name="action" value="cancel" class="btn btn-effect-4 btn-white">Cancel</button>
+                            <button type="submit" name="action" value="delete" class="btn btn-effect-4 btn-white">Delete</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  <!-- LOGIN AREA END -->
+
+
+{% endblock %}
+
+<!-- Checked -->

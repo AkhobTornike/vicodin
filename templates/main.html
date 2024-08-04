@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html class="no-js" lang="zxx">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Vicodin - Medical eCommerce HTML Template</title>
+    <meta name="robots" content="noindex, follow" />
+    <meta name="description" content="" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <link
+      rel="shortcut icon"
+      href="{% static 'images/favicon.png' %}"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="{% static 'styles/font-icons.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/plugins.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/responsive.css' %}" />
+  </head>
+
+  <body>
+    <div class="body-wrapper">
+      {% include 'navbar.html' %} {% if messages %}
+      <div class="alert alert-info">
+        {% for message in messages %} {{ message }} {% endfor %}
+      </div>
+      {% endif %}
+       {% block content %} 
+       
+       {% endblock content %} 
+       
+       {% include 'footer.html' %}
+
+      <!-- preloader area start -->
+      <div class="preloader d-none" id="preloader">
+        <div class="preloader-inner">
+          <div class="spinner">
+            <div class="dot1"></div>
+            <div class="dot2"></div>
+          </div>
+        </div>
+      </div>
+      <!-- preloader area end -->
+
+      <!-- All JS Plugins -->
+      <script src="{% static 'js/plugins.js' %}"></script>
+      <!-- Main JS -->
+      <script src="{% static 'js/main.js' %}"></script>
+    </div>
+  </body>
+</html>

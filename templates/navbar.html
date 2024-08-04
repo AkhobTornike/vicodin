@@ -1,0 +1,350 @@
+{% load static %}
+<header
+  class="ltn__header-area ltn__header-5 ltn__header-logo-and-mobile-menu-in-mobile--- ltn__header-logo-and-mobile-menu--- ltn__header-transparent gradient-color-4---"
+>
+  <!-- ltn__header-top-area start -->
+  <div class="ltn__header-top-area border-bottom top-area-color-white---">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-7">
+          <div class="ltn__top-bar-menu">
+            <ul>
+              <li>
+                <a
+                  href="mailto:info@webmail.com?Subject=Flower%20greetings%20to%20you"
+                  ><i class="icon-mail"></i> info@webmail.com</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="icon-placeholder"></i> 15/A, Nest Tower, NYC</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-5">
+          <div class="top-bar-right text-end">
+            <div class="ltn__top-bar-menu">
+              <ul>
+                <li>
+                  <!-- ltn__social-media -->
+                  <div class="ltn__social-media">
+                    <ul>
+                      <li>
+                        <a href="#" title="Facebook"
+                          ><i class="fab fa-facebook-f"></i
+                        ></a>
+                      </li>
+                      <li>
+                        <a href="#" title="Twitter"
+                          ><i class="fab fa-twitter"></i
+                        ></a>
+                      </li>
+
+                      <li>
+                        <a href="#" title="Instagram"
+                          ><i class="fab fa-instagram"></i
+                        ></a>
+                      </li>
+                      <li>
+                        <a href="#" title="Dribbble"
+                          ><i class="fab fa-dribbble"></i
+                        ></a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ltn__header-top-area end -->
+  <!-- ltn__header-middle-area start -->
+  <div
+    class="ltn__header-middle-area ltn__logo-right-menu-option ltn__header-row-bg-white ltn__header-padding ltn__header-sticky ltn__sticky-bg-white"
+  >
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="site-logo-wrap">
+            <div class="site-logo">
+              <a href="{% url 'home' %}"
+                ><img src="{% static 'images/logo.png' %}" alt="Logo"
+              /></a>
+            </div>
+            <div class="get-support clearfix d-none">
+              <div class="get-support-icon">
+                <i class="icon-call"></i>
+              </div>
+              <div class="get-support-info">
+                <h6>Get Support</h6>
+                <h4><a href="#">123-456-789-10</a></h4>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col header-menu-column menu-color-white---">
+          <div class="header-menu d-none d-xl-block">
+            <nav>
+              <div class="ltn__main-menu">
+                <ul>
+                  <li >
+                    <a href="{% url 'home' %}">Home</a>
+                  </li>
+                  <li >
+                    <a href="{% url 'shoping' %}">Shop</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'featured-products' %}">Featured</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'latest-products' %}">Latest</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'trending-products' %}">Trending</a>
+                  <li >
+                    <a href="{% url 'blog-page' %}">Blog</a>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+          </div>
+        </div>
+        <div class="col--- ltn__header-options ltn__header-options-2 mb-sm-20">
+          <!-- header-search-1 -->
+          <div class="header-search-wrap">
+            <div class="header-search-1">
+              <div class="search-icon">
+                <i class="icon-search for-search-show"></i>
+                <i class="icon-cancel for-search-close"></i>
+              </div>
+            </div>
+            <div class="header-search-1-form">
+              <form method="GET" action="">
+                {% csrf_token %}
+                <input
+                  type="text"
+                  name="q"
+                  value=""
+                  placeholder="Search here..."
+                />
+                <button type="submit">
+                  <span><i class="icon-search"></i></span>
+                </button>
+              </form>
+            </div>
+          </div>
+          <!-- user-menu -->
+          <div class="ltn__drop-menu user-menu">
+            <ul>
+              <li>
+                <a href="#"><i class="icon-user"></i></a>
+                <ul>
+                  {% if request.user.is_authenticated %}
+                  <li>
+                    <a href="{% url 'user-profile' request.user.id %}"
+                      >My Account</a
+                    >
+                  </li>
+                  {% else %}
+                  <li><a href="{% url 'login' %}">Sign in</a></li>
+                  <li><a href="{% url 'register' %}">Register</a></li>
+                  {% endif %}
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <!-- mini-cart -->
+          <div class="mini-cart-icon">
+            <a href="#ltn__utilize-cart-menu" class="ltn__utilize-toggle">
+              <i class="icon-shopping-cart"></i>
+              <sup>{{total_items}}</sup>
+            </a>
+          </div>
+          <!-- mini-cart -->
+          <!-- Mobile Menu Button -->
+          <div class="mobile-menu-toggle d-xl-none">
+            <a href="#ltn__utilize-mobile-menu" class="ltn__utilize-toggle">
+              <svg viewBox="0 0 800 600">
+                <path
+                  d="M300,220 C300,220 520,220 540,220 C740,220 640,540 520,420 C440,340 300,200 300,200"
+                  id="top"
+                ></path>
+                <path d="M300,320 L540,320" id="middle"></path>
+                <path
+                  d="M300,210 C300,210 520,210 540,210 C740,210 640,530 520,410 C440,330 300,190 300,190"
+                  id="bottom"
+                  transform="translate(480, 320) scale(1, -1) translate(-480, -318) "
+                ></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+ <!-- SIDEBAR -->
+ <div id="ltn__utilize-cart-menu" class="ltn__utilize ltn__utilize-cart-menu">
+  <div class="ltn__utilize-menu-inner ltn__scrollbar">
+    <div class="ltn__utilize-menu-head">
+      <span class="ltn__utilize-menu-title">Cart</span>
+      <button class="ltn__utilize-close">×</button>
+    </div>
+    <div class="mini-cart-product-area ltn__scrollbar">
+      {% if cart %}
+      {% for item in cartItems %}
+      <div class="mini-cart-item clearfix">
+        <div class="mini-cart-img">
+          <a href="{% url 'product-detail' item.product.id %}">
+            <img src="{{item.product.main_image.url}}" alt="Image" />
+          </a>
+          <form action="" method="POST">
+            {% csrf_token %}
+            <button type="submit" name="delete-cartItem" value="{{item.id}}">
+                <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
+            </button>
+        </form>
+        </div>
+        <div class="mini-cart-info">
+          <h6><a href="{% url 'product-detail' item.product.id %}">{{item.product.name}}</a></h6>
+          <span class="mini-cart-quantity">{{item.quantity}} x ${{item.product.discounted_price}}</span>
+        </div>
+      </div>
+      {% endfor %}
+    {% else %}
+      <p>Your cart is empty.</p>
+    {% endif %}
+    </div>
+    <div class="mini-cart-footer">
+      <div class="mini-cart-sub-total">
+        <h5>Subtotal: <span>${{total_price}}</span></h5>
+      </div>
+      <div class="btn-wrapper">
+        <a href="{% url 'cart' %}" class="theme-btn-1 btn btn-effect-1"
+          >View Cart</a
+        >
+        <a href="{% url 'checkout' %}" class="theme-btn-2 btn btn-effect-2">Checkout</a>
+      </div>
+      <p>Free Shipping on All Orders Over $100!</p>
+    </div>
+  </div>
+</div>
+
+    <!-- Utilize Mobile Menu Start -->
+    <div id="ltn__utilize-mobile-menu" class="ltn__utilize ltn__utilize-mobile-menu">
+      <div class="ltn__utilize-menu-inner ltn__scrollbar">
+          <div class="ltn__utilize-menu-head">
+              <div class="site-logo">
+                  <a href="{% url 'home' %}"><img src="{% static 'images/logo.png' %}" alt="Logo"></a>
+              </div>
+              <button class="ltn__utilize-close">×</button>
+          </div>
+          <div class="ltn__utilize-menu-search-form">
+            <form method="GET" action="">
+              {% csrf_token %}
+              <input
+                type="text"
+                name="q"
+                value=""
+                placeholder="Search here..."
+              />
+              <button type="submit">
+                <span><i class="icon-search"></i></span>
+              </button>
+            </form>
+          </div>
+          <div class="ltn__utilize-menu">
+            <ul>
+              <li >
+                <a href="{% url 'home' %}">Home</a>
+              </li>
+              <li >
+                <a href="{% url 'shoping' %}">Shop</a>
+              </li>
+              <li>
+                <a href="{% url 'featured-products' %}">Featured</a>
+              </li>
+              <li>
+                <a href="{% url 'latest-products' %}">Latest</a>
+              </li>
+              <li>
+                <a href="{% url 'trending-products' %}">Trending</a>
+              <li >
+                <a href="{% url 'blog-page' %}">Blog</a>
+              </li>
+            </ul>
+          </div>
+          <div class="ltn__utilize-buttons ltn__utilize-buttons-2">
+              <ul>
+                  <li>
+                      <a href="{% url 'user-profile' request.user.id %}" title="My Account">
+                          <span class="utilize-btn-icon">
+                              <i class="far fa-user"></i>
+                          </span>
+                          My Account
+                      </a>
+                  </li>
+                  <li>
+                      <a href="{% url 'cart' %}" title="Shoping Cart">
+                          <span class="utilize-btn-icon">
+                              <i class="fas fa-shopping-cart"></i>
+                              <sup>{{total_items}}</sup>
+                          </span>
+                          Shoping Cart
+                      </a>
+                  </li>
+              </ul>
+          </div>
+          <div class="ltn__social-media-2">
+              <ul>
+                  <li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                  <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+                  <li><a href="#" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
+                  <li><a href="#" title="Instagram"><i class="fab fa-instagram"></i></a></li>
+              </ul>
+          </div>
+      </div>
+  </div>
+  <!-- Utilize Mobile Menu End -->
+
+<!-- BREADCRUMB AREA START -->
+{% if request.path != '/' %}
+<div
+  class="ltn__breadcrumb-area text-left bg-overlay-white-30 bg-image"
+  data-bs-bg="img/bg/14.jpg"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="ltn__breadcrumb-inner">
+          <h1 class="page-title">Cart</h1>
+          <div class="ltn__breadcrumb-list">
+            <ul>
+              <li>
+                <a href="{% url 'home' %}"
+                  ><span class="ltn__secondary-color"
+                    ><i class="fas fa-home"></i
+                  ></span>
+                  Home</a
+                >
+              </li>
+              
+              {% for segment, url in path_segments %}
+              <li><a href="{{ url }}">{{ segment }}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+  <!-- BREADCRUMB AREA END -->
+

@@ -1,0 +1,42 @@
+{% extends 'main.html' %} {% load static %} {% block content %}
+
+<div class="ltn__comment-reply-area ltn__form-box mb-60---">
+    {% if obj|default_if_none:'' %}
+    {% if obj_class_name == 'Comment' %}
+    <h4 class="title-2">
+        Reply to <span>@{{ obj.user.username }}</span>
+    </h4>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+      <div class="btn-wrapper">
+        <button
+          class="btn theme-btn-1 btn-effect-1 text-uppercase"
+          type="submit"
+        >
+          <i class="far fa-comments"></i> Reply Comment
+        </button>
+      </div>
+    </form>
+    {% elif obj_class_name == 'Blog' %}
+    <h4 class="title-2">
+        Leave a Comment to <span>@{{ obj.title }}</span>
+    </h4>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+      <div class="btn-wrapper">
+        <button
+          class="btn theme-btn-1 btn-effect-1 text-uppercase"
+          type="submit"
+        >
+          <i class="far fa-comments"></i> Leave Comment
+        </button>
+      </div>
+    </form>
+    {% endif %}
+    {% endif %}
+  </div>
+{% endblock %}
+
+<!-- Checked -->
